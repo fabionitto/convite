@@ -16,22 +16,28 @@ EVENTOS_PATH = os.path.join(BASE_DIR, 'dados_eventos.json')
 VERCEL_URL_CONVIDADOS = os.environ.get("VERCEL_URL_CONVIDADOS")
 VERCEL_URL_EVENTOS = os.environ.get("VERCEL_URL_EVENTOS")
 
+# Captura o token de segurança das variáveis de ambiente
+VERCEL_BLOB_TOKEN = os.environ.get("BLOB_READ_WRITE_TOKEN")
+
 def obter_dados(caminho_local, url_remota=None):
-    """
-    Tenta buscar o JSON na URL remota. Se falhar, demorar, ou não existir URL,
-    faz o fallback seguro para o arquivo JSON local.
-    """
     if url_remota:
         try:
-            # Timeout de 5 segundos evita que seu app Flask trave se o Vercel demorar a responder
-            resposta = requests.get(url_remota, timeout=5)
-            resposta.raise_for_status() # Verifica se deu erro HTTP (ex: 404, 500)
-            print(f"Dados carregados com sucesso do Vercel: {url_remota}")
-            return resposta.json()
-        except requests.RequestException as e:
-            print(f"Falha ao buscar no Vercel ({url_remota}): {e}")
-            print("Fazendo fallback para o arquivo local...")
+            # Prepara o cabeçalho de autorização (O Crachá)
+            headers = {}
+            if VERCEL_BLOB_TOKEN:
+                headers['Authorization'] = f'Bearer {VERCEL_BLOB_TOKEN}'
 
+            # Faz a requisição enviando o token
+            resposta = requests.get(url_remota, headers=headers, timeout=5)
+            resposta.raise_for_status() 
+            
+            print(f"✅ Dados carregados com sucesso do Vercel: {url_remota}")
+            return resposta.json()
+            
+        except requests.RequestException as e:
+            print(f"⚠️ Falha ao buscar no Vercel ({url_remota}): {e}")
+            print("🔄 Fazendo fallback para o arquivo local...")
+            
     # Rotina de Fallback para o arquivo local
     try:
         with open(caminho_local, 'r', encoding='utf-8') as f:
