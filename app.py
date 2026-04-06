@@ -2,6 +2,7 @@ import os
 import json
 import urllib.parse
 import requests
+import logging # 1. Importe a biblioteca nativa
 from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
@@ -31,23 +32,23 @@ def obter_dados(caminho_local, url_remota=None):
             resposta = requests.get(url_remota, headers=headers, timeout=5)
             resposta.raise_for_status() 
             
-            print(f"✅ Dados carregados com sucesso do Vercel: {url_remota}")
+            logging.warning(f"✅ Dados carregados com sucesso do Vercel: {url_remota}")
             return resposta.json()
             
         except requests.RequestException as e:
-            print(f"⚠️ Falha ao buscar no Vercel ({url_remota}): {e}")
-            print("🔄 Fazendo fallback para o arquivo local...")
-            
+            logging.warning(f"⚠️ Falha ao buscar no Vercel ({url_remota}): {e}")
+            logging.warning("🔄 Fazendo fallback para o arquivo local...")
+
     # Rotina de Fallback para o arquivo local
     try:
         with open(caminho_local, 'r', encoding='utf-8') as f:
-            print(f"Dados carregados do arquivo local: {caminho_local}")
+            logging.warning(f"Dados carregados do arquivo local: {caminho_local}")
             return json.load(f)
     except FileNotFoundError:
-        print(f"❌ Erro: Arquivo local '{caminho_local}' não encontrado.")
+        logging.warning(f"❌ Erro: Arquivo local '{caminho_local}' não encontrado.")
         return {}
     except json.JSONDecodeError:
-        print(f"❌ Erro: Arquivo local '{caminho_local}' possui JSON inválido.")
+        logging.warning(f"❌ Erro: Arquivo local '{caminho_local}' possui JSON inválido.")
         return {}
 
 # Carrega os dados na memória (executado ao iniciar o servidor Flask)
