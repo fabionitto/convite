@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #2c2c2c; /* Fundo escuro atrás do celular para destacar o convite */
+    font-family: sans-serif;
+}
+
+.mobile-container {
+    width: 100vw;
+    max-width: 400px; /* Evita que fique gigante no PC */
+    aspect-ratio: 9 / 16;
+    background-color: #ffffff; /* Fundo branco (substitua por imagem depois) */
+    /* Para adicionar imagem depois, use:
+       background-image: url('../sua-imagem.jpg');
+       background-size: cover;
+       background-position: center;
+    */
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 30px 20px;
+    overflow-y: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Menu Inferior */
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 1px solid #eaeaea;
+}
+
+.nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    font-size: 11px;
+    font-weight: 600;
+    gap: 6px;
+    transition: opacity 0.2s;
+}
+
+.nav-btn:hover {
+    opacity: 0.6;
+}
+
+/* Ícones flat line */
+.nav-btn svg {
+    width: 24px;
+    height: 24px;
+    stroke: #000;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+/* Botões Genéricos (Voltar, Maps, Copiar) */
+.btn {
+    display: inline-block;
+    padding: 12px 24px;
+    margin: 10px 0;
+    background-color: #000;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+    transition: 0.2s;
+}
+
+.btn:hover { background-color: #333; }
+.btn-secondary { background-color: #666; }
+.btn-secondary:hover { background-color: #888; }

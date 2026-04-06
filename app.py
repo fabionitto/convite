@@ -1,81 +1,89 @@
-import os
-from flask import Flask, request, render_template_string
-from libsql_client import create_client_sync
+import urllib.parse
+from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
-# Configuração do Turso usando Variáveis de Ambiente
-TURSO_URL = os.environ.get("TURSO_DATABASE_URL")
-TURSO_TOKEN = os.environ.get("TURSO_AUTH_TOKEN")
+# Exemplo de banco de dados em memória. 
+# Totaliza cerca de 70 convidados agrupados por família/grupos.
+CONVIDADOS = {
+    "123e4567-e89b-12d3-a456-426614174001": {"familia": "Família Silva", "nomes": ["Carlos Silva", "Ana Silva", "Lucas Silva", "Mariana Silva"]},
+    "123e4567-e89b-12d3-a456-426614174002": {"familia": "Família Costa", "nomes": ["Roberto Costa", "Juliana Costa", "Bebê Pedro"]},
+    "123e4567-e89b-12d3-a456-426614174003": {"familia": "Família Oliveira", "nomes": ["Fernando Oliveira", "Cláudia Oliveira", "Tiago", "Beatriz", "Sofia"]},
+    "123e4567-e89b-12d3-a456-426614174004": {"familia": "Família Souza", "nomes": ["Marcos Souza", "Helena Souza"]},
+    "123e4567-e89b-12d3-a456-426614174005": {"familia": "Família Santos", "nomes": ["João Santos", "Maria Santos", "Felipe", "Camila", "Rafael", "Larissa"]},
+    "123e4567-e89b-12d3-a456-426614174006": {"familia": "Família Pereira", "nomes": ["Antônio Pereira", "Lúcia Pereira", "Bruno"]},
+    "123e4567-e89b-12d3-a456-426614174007": {"familia": "Família Rodrigues", "nomes": ["José Rodrigues", "Marta Rodrigues", "Ricardo", "Paulo"]},
+    "123e4567-e89b-12d3-a456-426614174008": {"familia": "Família Almeida", "nomes": ["Pedro Almeida", "Teresa Almeida"]},
+    "123e4567-e89b-12d3-a456-426614174009": {"familia": "Família Lima", "nomes": ["Luiz Lima", "Sandra Lima", "Igor", "Vanessa", "Diego"]},
+    "123e4567-e89b-12d3-a456-426614174010": {"familia": "Família Gomes", "nomes": ["Marcelo Gomes", "Patrícia Gomes", "Amanda"]},
+    "123e4567-e89b-12d3-a456-426614174011": {"familia": "Família Martins", "nomes": ["Eduardo Martins", "Camila Martins", "Thiago", "Letícia"]},
+    "123e4567-e89b-12d3-a456-426614174012": {"familia": "Amigos da Faculdade", "nomes": ["Rafael", "Gabriel", "Vítor", "Henrique", "Renato", "Gustavo"]},
+    "123e4567-e89b-12d3-a456-426614174013": {"familia": "Amigas da Noiva", "nomes": ["Laura", "Isabela", "Juliana", "Carol", "Fernanda"]},
+    "123e4567-e89b-12d3-a456-426614174014": {"familia": "Família Carvalho", "nomes": ["Sérgio Carvalho", "Mônica Carvalho", "André"]},
+    "123e4567-e89b-12d3-a456-426614174015": {"familia": "Família Mendes", "nomes": ["Rodrigo Mendes", "Tatiana Mendes", "Gustavo", "Carolina", "Alice", "Miguel"]},
+    "123e4567-e89b-12d3-a456-426614174016": {"familia": "Primos", "nomes": ["Leandro", "Matheus", "Jéssica", "Bianca", "Thiago"]},
+}
 
-# Template HTML minimalista (Mantido igual ao anterior)
-HTML_TEMPLATE = """
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSVP Casamento</title>
-    <style>
-        body { font-family: sans-serif; text-align: center; margin-top: 50px; background-color: #fafafa; }
-        .card { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; max-width: 400px; width: 90%; }
-        .btn { padding: 12px 24px; margin: 10px; border: none; cursor: pointer; border-radius: 5px; font-weight: bold; width: 80%; transition: 0.2s; }
-        .btn-yes { background-color: #2e7d32; color: white; }
-        .btn-yes:hover { background-color: #1b5e20; }
-        .btn-no { background-color: #c62828; color: white; }
-        .btn-no:hover { background-color: #b71c1c; }
-    </style>
-</head>
-<body>
-    <div class="card">
-        <h2>Olá, {{ nome }}!</h2>
-        <p>Estamos muito felizes em convidar você para o nosso casamento.</p>
-        <p>Este convite é exclusivo para <strong>{{ vagas }} pessoa(s)</strong>.</p>
-        
-        <form method="POST">
-            <button class="btn btn-yes" type="submit" name="status" value="confirmado">Confirmar Presença</button>
-            <button class="btn btn-no" type="submit" name="status" value="recusado">Não Poderei Ir</button>
-        </form>
-    </div>
-</body>
-</html>
-"""
+@app.route('/')
+def landing_default():
+    """Página mostrada se nenhum UUID for passado"""
+    return render_template('landing.html', dados=None)
 
-def get_db_client():
-    """Cria a conexão com o banco Turso"""
-    return create_client_sync(url=TURSO_URL, auth_token=TURSO_TOKEN)
+@app.route('/<token>')
+def landing_personalizada(token):
+    """Landing page com os nomes da família e botão para o convite"""
+    dados = CONVIDADOS.get(token)
+    if not dados:
+        return redirect(url_for('landing_default'))
+    return render_template('landing.html', dados=dados, token=token)
 
-@app.route('/rsvp/<token>', methods=['GET', 'POST'])
-def rsvp(token):
-    # Conecta ao banco de dados
-    client = get_db_client()
+@app.route('/convite/<token>')
+def convite(token):
+    """Página do convite real com os 4 botões de navegação"""
+    dados = CONVIDADOS.get(token)
+    if not dados:
+        return redirect(url_for('landing_default'))
+    return render_template('convite.html', token=token, dados=dados)
+
+@app.route('/confirmar/<token>')
+def confirmar(token):
+    """Gera o link dinâmico do WhatsApp e redireciona"""
+    dados = CONVIDADOS.get(token)
+    if not dados:
+        return redirect(url_for('landing_default'))
     
-    # Busca o convidado pelo token
-    resultado = client.execute("SELECT nome, vagas, status FROM convidados WHERE token = ?", [token])
+    nomes = ", ".join(dados["nomes"])
+    numero_whatsapp = "5561999999999" # DDD 61
     
-    # Se a query não retornar linhas, o token não existe
-    if not resultado.rows:
-        return "<h3>Convite inválido ou não encontrado.</h3>", 404
-
-    # Extrai os dados do convidado retornado
-    linha = resultado.rows[0]
-    nome_convidado = linha[0]
-    vagas_convidado = linha[1]
+    # Monta uma mensagem customizada com a lista de nomes atrelada àquele UUID
+    texto_base = f"Olá! Gostaria de confirmar a presença do nosso grupo no casamento:\n\n{nomes}."
+    mensagem_encoded = urllib.parse.quote(texto_base)
     
-    if request.method == 'POST':
-        novo_status = request.form.get('status')
-        
-        # Atualiza o status no banco de dados
-        client.execute(
-            "UPDATE convidados SET status = ? WHERE token = ?", 
-            [novo_status, token]
-        )
-        
-        mensagem = "Presença confirmada! Te esperamos lá." if novo_status == "confirmado" else "Que pena! Sentiremos sua falta."
-        return f"<h3>Obrigado! {mensagem}</h3>"
+    whatsapp_link = f"https://wa.me/{numero_whatsapp}?text={mensagem_encoded}"
+    return redirect(whatsapp_link)
 
-    # GET: Renderiza o formulário com os dados do banco
-    return render_template_string(HTML_TEMPLATE, nome=nome_convidado, vagas=vagas_convidado)
+@app.route('/presentes/<token>')
+def presentes(token):
+    pix_code = "00020126580014br.gov.bcb.pix0136sua-chave-pix-aqui..."
+    return render_template('presentes.html', pix_code=pix_code, token=token)
+
+@app.route('/cerimonia/<token>')
+def cerimonia(token):
+    evento = {
+        "titulo": "Cerimônia",
+        "descricao": "Nossa cerimônia religiosa será realizada na Igreja Matriz, às 19h00.",
+        "maps_link": "https://maps.app.goo.gl/seu_link_aqui"
+    }
+    return render_template('evento.html', evento=evento, token=token)
+
+@app.route('/recepcao/<token>')
+def recepcao(token):
+    evento = {
+        "titulo": "Recepção",
+        "descricao": "Após a cerimônia, esperamos você no Salão de Festas XYZ para comemorarmos juntos!",
+        "maps_link": "https://maps.app.goo.gl/seu_link_aqui"
+    }
+    return render_template('evento.html', evento=evento, token=token)
 
 if __name__ == '__main__':
     app.run(debug=True)

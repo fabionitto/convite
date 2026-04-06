@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Lista de Presentes</h2>
+    <p style="margin-top: 15px; margin-bottom: 25px; color: #555;">
+        A nossa maior alegria é a sua presença! Mas, se desejar nos presentear, criamos uma chave PIX:
+    </p>
+    
+    <input type="text" id="pixCode" value="{{ pix_code }}" readonly style="width: 100%; padding: 12px; margin-bottom: 15px; text-align: center; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; color: #333;">
+    
+    <button class="btn" onclick="copyPix()">Copiar Código PIX</button>
+    <a href="{{ url_for('convite', token=token) }}" class="btn btn-secondary">Voltar</a>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function copyPix() {
+    var copyText = document.getElementById("pixCode");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* Para mobile */
+    navigator.clipboard.writeText(copyText.value).then(function() {
+        alert("Código PIX copiado com sucesso!");
+    });
+}
+</script>
+{% endblock %}
