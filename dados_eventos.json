@@ -1,0 +1,12 @@
+{
+    "cerimonia": {
+        "titulo": "Cerimônia",
+        "descricao": "Nossa cerimônia religiosa será realizada na Catedral Metropolitana de Brasília, às 19h00. Contamos com a sua presença para abençoar nossa união.",
+        "maps_link": "https://maps.app.goo.gl/exemplo-catedral"
+    },
+    "recepcao": {
+        "titulo": "Recepção",
+        "descricao": "Após a cerimônia, esperamos você em nosso espaço de festas no Lago Sul para comemorarmos juntos!",
+        "maps_link": "https://maps.app.goo.gl/exemplo-lagosul"
+    }
+}
