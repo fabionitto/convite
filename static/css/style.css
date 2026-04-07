@@ -28,19 +28,43 @@ body {
 
 .mobile-container {
     position: relative;
+    overflow: hidden;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     background: linear-gradient(rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.35)), url('/static/images/igrejinha.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 30px;
-    width: min(90vw, 60vh);
-    max-width: min(90vw, 55vh);
+    width: min(95vw, 60vh);
+    max-width: min(95vw, 55vh);
     min-width: 300px;
     aspect-ratio: 9/16;
     container-type: inline-size;
 }
 
+.bg-fixed {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-size: 8em;
+    /* Estilo Dinâmico usando o seu CQW */
+    font-family: 'Aniyah', cursive;
+    font-size: clamp(2rem, 30cqw, 15rem); 
+    color: rgba(0, 0, 0, 0.15); 
+    
+    z-index: 0;           /* Fica atrás do .content */
+    pointer-events: none; /* Não atrapalha os cliques nos botões */
+    white-space: nowrap;
+    user-select: none;
+}
+
+.bg-C {
+    top: 18%;
+    left: 35%;
+}
+.bg-F {
+    top: 40%;
+    left: 60%;
+}
 
 .content {
     position: absolute;
@@ -69,13 +93,16 @@ body {
 /* Menu Inferior */
 .bottom-nav {
     display: flex;
-    justify-content: space-between;
+    position: absolute;
+    justify-content: space-around;
     align-items: center;
     padding: 15px 20px;
     background: transparent;
     border-top: 1px solid #eaeaea;
     gap: clamp(0px, 10cqw, 15px);
-
+    bottom: 0;   /* Cola na base */
+    left: 0;     /* Alinha à esquerda */
+    right: 0;    /* Estica até a direita */
 }
 
 .nav-btn {
