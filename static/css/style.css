@@ -100,6 +100,7 @@ body {
     background: transparent;
     border-top: 1px solid #eaeaea;
     gap: clamp(0px, 10cqw, 15px);
+    height: clamp(40px, 25cqw, 80px);
     bottom: 0;   /* Cola na base */
     left: 0;     /* Alinha à esquerda */
     right: 0;    /* Estica até a direita */
@@ -114,7 +115,6 @@ body {
     font-size: clamp(0.2rem, 2.5cqw, 1rem);
     font-weight: 600;
     transition: opacity 0.2s;
-    height: 80px;
 }
 
 .nav-btn:hover {
