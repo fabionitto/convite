@@ -20,6 +20,10 @@ VERCEL_URL_EVENTOS = os.environ.get("VERCEL_URL_EVENTOS")
 # Captura o token de segurança das variáveis de ambiente
 VERCEL_BLOB_TOKEN = os.environ.get("BLOB_READ_WRITE_TOKEN")
 
+# Nova variável para o telefone. 
+# O segundo parâmetro ("5561...") é o fallback caso a variável falhe.
+WHATSAPP_NUMERO = os.environ.get("WHATSAPP_NUMERO", "5561999999999")
+
 def obter_dados(caminho_local, url_remota=None):
     if url_remota:
         try:
@@ -84,12 +88,12 @@ def confirmar(token):
         return redirect(url_for('landing_default'))
     
     nomes = ", ".join(dados["nomes"])
-    numero_whatsapp = "5561999999999" # Insira seu número
     
     texto_base = f"Olá! Gostaria de confirmar a presença do nosso grupo no casamento:\n\n{nomes}."
     mensagem_encoded = urllib.parse.quote(texto_base)
     
-    whatsapp_link = f"https://wa.me/{numero_whatsapp}?text={mensagem_encoded}"
+    whatsapp_link = f"https://wa.me/{WHATSAPP_NUMERO}?text={mensagem_encoded}"
+    
     return redirect(whatsapp_link)
 
 
