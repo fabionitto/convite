@@ -1,12 +1,28 @@
 {
-    "cerimonia": {
-        "titulo": "Cerimônia",
-        "descricao": "Nossa cerimônia religiosa será realizada na Catedral Metropolitana de Brasília, às 19h00. Contamos com a sua presença para abençoar nossa união.",
-        "maps_link": "https://maps.app.goo.gl/exemplo-catedral"
+  "cerimonia": {
+    "titulo": "Cerimônia",
+    "nome": "Igrejinha Asa Sul",
+    "endereco": "EQS 307/308 - Asa Sul",
+    "cidade": "Brasília",
+    "estado": "DF",
+    "cep": "70390-100",
+    "horario": "14:30 horas",
+    "data": "23 de maio de 2026",
+    "descricao": "...",
+    "maps_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4408.633049965761!2d-47.90629852429893!3d-15.813983584829169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a3ab7be1ae975%3A0xd5d101c330606b12!2sIgrejinha%20Nossa%20Senhora%20de%20F%C3%A1tima!5e1!3m2!1spt-BR!2sbr!4v1775495092578!5m2!1spt-BR!2sbr",
+    "maps_search": "Igrejinha+Asa+Sul"
     },
-    "recepcao": {
-        "titulo": "Recepção",
-        "descricao": "Após a cerimônia, esperamos você em nosso espaço de festas no Lago Sul para comemorarmos juntos!",
-        "maps_link": "https://maps.app.goo.gl/exemplo-lagosul"
-    }
+  "recepcao": {
+    "titulo": "Recepção",
+    "nome": "Vert Café Asa Sul",
+    "endereco": "403 Sul - BL B Loja 34 - Asa Sul",
+    "cidade": "Brasília",
+    "estado": "DF",
+    "cep": "70237-520",
+    "horario": "16:00 horas",
+    "data": "23 de maio de 2026",
+    "descricao": "...",
+    "maps_embed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1505.8227169626448!2d-47.88614181555255!3d-15.808662317429444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a3bef88d35903%3A0x3fbf7e793c8c8408!2sVert%20Caf%C3%A9!5e1!3m2!1spt-BR!2sbr!4v1775494807784!5m2!1spt-BR!2sbr",
+    "maps_search": "Vert+Café+Asa+Sul"
+  }
 }

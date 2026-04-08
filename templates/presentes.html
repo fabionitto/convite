@@ -1,15 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h2>Lista de Presentes</h2>
+    <h2>Com carinho</h2>
     <p style="margin-top: 15px; margin-bottom: 25px; color: #555;">
-        A nossa maior alegria é a sua presença! Mas, se desejar nos presentear, criamos uma chave PIX:
+        Ficamos imensamente felizes com o seu desejo de nos presentear!
     </p>
-    
+    <p>Sua presença é o que mais nos alegra! Se você deseja nos homenagear com um presente, gostaríamos de sugerir que esse <strong>carinho seja transformado em solidariedade e em um gesto de amor ao próximo.</strong></p>
+    <p>Estaremos arrecadando <strong>doações em qualquer valor</strong> que serão revertidas na doação de alimentos e ração. Assim, juntos, multiplicaremos o bem e faremos o dia de alguém (e de muitos focinhos) mais feliz!</p>
+    <p>Faça a sua contribuição pelo QRCode abaixo ou copie o PIX Copia e Cola:</p>
+
     <input type="text" id="pixCode" value="{{ pix_code }}" readonly style="width: 100%; padding: 12px; margin-bottom: 15px; text-align: center; border: 1px solid #ccc; border-radius: 8px; background-color: #f9f9f9; color: #333;">
-    
-    <button class="btn" onclick="copyPix()">Copiar Código PIX</button>
-    <a href="{{ url_for('convite', token=token) }}" class="btn btn-secondary">Voltar</a>
+{% endblock %}
+
+{% block nav %}
+    <div class="bottom-nav">
+        <a href="{{ url_for('presentes', token=token) }}" class="nav-btn" onclick="copyPix()">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 12l10 10 10-10L12 2z"></path><path d="M8 12l4 4 4-4"></path><path d="M12 8v8"></path></svg>
+            Copiar Código PIX
+        </a>
+        <a href="{{ url_for('convite', token=token) }}" class="nav-btn">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+            Voltar
+        </a>
+    </div>
 {% endblock %}
 
 {% block scripts %}
