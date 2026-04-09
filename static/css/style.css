@@ -81,6 +81,16 @@ body {
     container-type: inline-size;
 }
 
+/* --- Estilos Específicos da Página de Presentes --- */
+.texto-reduzido {
+    font-size: 0.85rem; /* Reduz o tamanho geral do texto para 85% do padrão */
+    width: 100%; /* Garante que os botões continuem esticando corretamente */
+}
+
+.texto-reduzido h2 {
+    font-size: 1.6em; /* Ajusta o título para não ficar minúsculo */
+}
+
 .footer {
     text-align: center;
     color: #666;
