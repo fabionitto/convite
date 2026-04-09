@@ -3,16 +3,16 @@
 {% block content %}
     {% if dados %}
     <div class="convite-text">
-        <h2 style="margin-bottom: 20px;">Olá, {{ dados.familia }}!</h2>
-        <p style="color: #555;">Temos a imensa alegria de convidar:</p>
+        <h2 style="margin-bottom: 30px;">Olá, {{ dados.familia }}!</h2>
+        <p>Temos a imensa alegria de convidar:</p>
         
-        <ul style="list-style: none; padding: 0; font-weight: bold; margin: 25px 0; font-size: 18px; color: #2c2c2c;">
+        <ul style="list-style: none; padding: 0; font-weight: bold; margin: 25px 0; font-size: 18px;">
         {% for nome in dados.nomes %}
             <li style="margin-bottom: 8px;">{{ nome }}</li>
         {% endfor %}
         </ul>
         
-        <p style="color: #555; margin-bottom: 30px;">para celebrar nosso casamento.</p>
+        <p style="margin-bottom: 30px;">para celebrar nosso casamento.</p>
     </div>    
         <div class="bottom-nav">
             <a href="{{ url_for('convite', token=token) }}" class="nav-btn">
@@ -23,8 +23,8 @@
     {% else %}
     <div class="convite-text">
         <h2 style="margin-bottom: 20px;">Olá!</h2>
-        <p style="color: #555; line-height: 1.6;">Convite não encontrado ou link inválido.</p>
-        <p style="color: #555; line-height: 1.6; margin-top: 15px;">Por favor, entre em contato com os organizadores do evento para receber seu link personalizado.</p>
+        <p style="line-height: 1.6;">Convite não encontrado ou link inválido.</p>
+        <p style="line-height: 1.6; margin-top: 15px;">Por favor, entre em contato com os organizadores do evento para receber seu link personalizado.</p>
     </div>
     {% endif %}
 {% endblock %}
