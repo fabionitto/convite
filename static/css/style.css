@@ -181,7 +181,9 @@ body {
     font-size: clamp(0.6rem, 10cqw, 8.5rem);
     margin: clamp(0px, 10cqw, 10px) 0;
 }
-
+.invitation-top-text {
+    margin-top: 20px;
+}
 .invitation-subtext {
     text-align: center;
 }
