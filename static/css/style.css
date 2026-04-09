@@ -82,7 +82,7 @@ body {
 }
 
 /* --- Estilos Específicos da Página de Presentes --- */
-.texto-reduzido {
+.convite-text {
     justify-content: space-around;
     width: 100%; /* Garante que os botões continuem esticando corretamente */
     container-type: inline-size;
@@ -90,7 +90,7 @@ body {
 
 /* --- Estilos Específicos da Página de Presentes --- */
 .texto-reduzido {
-    font-size: clamp(0.6rem, 6cqw, 0.9rem);
+    font-size: clamp(0.55rem, 4.5cqw, 0.9rem);
     text-align: justify;
     width: 100%; /* Garante que os botões continuem esticando corretamente */
 }
