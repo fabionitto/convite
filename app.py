@@ -99,7 +99,7 @@ def confirmar(token):
 
 @app.route('/presentes/<token>')
 def presentes(token):
-    pix_code = "00020126580014br.gov.bcb.pix0136sua-chave-pix-aqui..."
+    pix_code = "00020126850014br.gov.bcb.pix013686b2f8e3-6f85-4e71-a6c3-591f03c59b6b0223Casamento_Fabio_e_Carol5204000053039865802BR5919FABIO_HITSUKI_NITTO6008BRASILIA62130509Casamento630482A4"
     return render_template('presentes.html', pix_code=pix_code, token=token)
 
 
