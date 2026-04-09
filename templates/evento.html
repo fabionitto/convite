@@ -46,12 +46,9 @@
     {% endif %}
     
     {% if evento.maps_embed %}
-    <div style="margin-top: 20px; border-radius: 10px; overflow: hidden;">
+    <div class="map-wrapper">
         <iframe 
             src="{{ evento.maps_embed }}" 
-            width="100%" 
-            height="300" 
-            style="border:0;" 
             allowfullscreen="" 
             loading="lazy" 
             referrerpolicy="no-referrer-when-downgrade"
