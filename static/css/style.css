@@ -83,7 +83,7 @@ body {
 
 /* --- Estilos Específicos da Página de Presentes --- */
 .texto-reduzido {
-    font-size: clamp(0.4rem, 4cqw, 0.9rem);
+    font-size: clamp(0.4rem, 5cqw, 0.9rem);
     text-align: justify;
     width: 100%; /* Garante que os botões continuem esticando corretamente */
 }
