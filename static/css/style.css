@@ -83,7 +83,7 @@ body {
 
 /* --- Estilos Específicos da Página de Presentes --- */
 .texto-reduzido {
-    font-size: 0.85rem; /* Reduz o tamanho geral do texto para 85% do padrão */
+    font-size: clamp(0.75rem, 4cqw, 0.9rem);
     width: 100%; /* Garante que os botões continuem esticando corretamente */
 }
 
