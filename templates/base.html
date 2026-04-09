@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Convite de Casamento</title>
+    <meta property="og:title" content="Convite de Casamento - Carol & Fábio">
+    <meta property="og:description" content="Temos a imensa alegria de convidar você para celebrar nosso casamento!"> 
+    <meta property="og:image" content="{{ url_for('static', filename='images/preview.png', _external=True) }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+    
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
