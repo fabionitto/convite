@@ -183,11 +183,9 @@ body {
 
 /* O container que envolve o mapa */
 .map-wrapper {
-    margin-top: 20px;
+    margin-top: 10px;
     border-radius: 10px;
     overflow: hidden;
-    /* Essencial para usar cqw/cqh */
-    container-type: inline-size; 
     width: 100%;
 }
 
@@ -195,8 +193,6 @@ body {
 .map-wrapper iframe {
     width: 100%;
     border: 0;
-    /* O "pulo do gato": Altura dinâmica */
-    height: clamp(250px, 40cqw, 500px);
     aspect-ratio: 1;
     /* Garante que o conteúdo se ajuste bem */
     display: block; 
