@@ -4,43 +4,43 @@
     <h2>{{ evento.titulo }}</h2>
    
     {% if evento.nome %}
-    <p style="margin-top: 20px; font-weight: bold; font-size: 1.1em;">
+    <p style="margin-top: 10px; font-weight: bold; font-size: 1.1em;">
         {{ evento.nome }}
     </p>
     {% endif %}
     
     {% if evento.endereco %}
-    <p style="margin-top: 10px; color: #555;">
+    <p style="margin-top: 5px;">
         {{ evento.endereco }}
     </p>
     {% endif %}
     
     {% if evento.cidade and evento.estado %}
-    <p style="margin-top: 5px; color: #555;">
+    <p>
         {{ evento.cidade }} - {{ evento.estado }}
     </p>
     {% endif %}
     
     {% if evento.cep %}
-    <p style="margin-top: 5px; font-size: 0.9em;">
+    <p style="font-size: 0.9em;">
         CEP: {{ evento.cep }}
     </p>
     {% endif %}
     
     {% if evento.data %}
-    <p style="margin-top: 20px; font-weight: bold;">
+    <p style="margin-top: 10px; font-weight: bold;">
         {{ evento.data }}
     </p>
     {% endif %}
     
     {% if evento.horario %}
-    <p style="margin-top: 10px; color: #555;">
+    <p style="margin-top: 5px;">
         {{ evento.horario }}
     </p>
     {% endif %}
 
     {% if evento.descricao and evento.descricao != '...' %}
-    <p style="margin-top: 15px; margin-bottom: 25px; color: #555; line-height: 1.5;">
+    <p style="margin-top: 5px; margin-bottom: 25px; color: #555; line-height: 1.5;">
         {{ evento.descricao }}
     </p>
     {% endif %}
