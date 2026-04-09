@@ -3,7 +3,11 @@
 {% block content %}
     {% if dados %}
     <div class="convite-text">
-        <h2 style="margin-bottom: 30px;">Olá, {{ dados.familia }}!</h2>
+        {% if dados.familia }}
+            <h2 style="margin-bottom: 30px;">Olá, {{ dados.familia }}!</h2>
+        {% else %}
+            <h2 style="margin-bottom: 30px;">Olá!</h2>
+        {% endif %}
         <p>Temos a imensa alegria de convidar:</p>
         
         <ul style="list-style: none; padding: 0; font-weight: bold; margin: 25px 0; font-size: 18px;">
